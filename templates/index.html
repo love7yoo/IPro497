@@ -204,6 +204,9 @@
           <p>User</p>
         </ul>
         <ul class="list-unstyled components">
+          <li>
+            <a href="{{ url_for('reservation') }}">Reservation</a>
+          </li>
           <p>Location</p>
           <li class="active">
             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Paul Galvin Library</a>
@@ -244,8 +247,10 @@
             </div>
           </div>
         </nav>
-
-        <h2>Content</h2>
+        {% block header %}
+          <h2>{% block title %}Content{% endblock %}</h2>
+        {% endblock %}
+        {% block content %}{% endblock %}
       </div>
     </div>
 
