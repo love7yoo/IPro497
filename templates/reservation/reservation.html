@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+
+{% block header %}
+  <h2>{% block title %}Register{% endblock %}</h2>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+      <br><br>
+    <h3>Location</h3>
+      <br>
+    &nbsp&nbsp<label for="building">Building Code</label> &nbsp
+    <input type="search" name="building" id="building" required> &nbsp&nbsp
+    &nbsp&nbsp<label for="room">Room</label> &nbsp
+    <input type="search" name="roomn" id="room" required>
+      <br><br>
+    <h3>Time</h3>
+      <br>
+    &nbsp&nbsp<label for="reservation_start">Start</label> &nbsp
+    <input type="datetime-local" name="reservation_start" id="reservation_start" required> &nbsp&nbsp
+    &nbsp&nbsp<label for="reservation_end">End</label> &nbsp
+    <input type="datetime-local" name="reservation_end" id="reservation_end" required> &nbsp&nbsp
+      <br><br>
+    <input type="submit" value="Reserve">
+  </form>
+{% endblock %}
