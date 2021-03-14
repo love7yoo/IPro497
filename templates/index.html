@@ -38,7 +38,7 @@
         font-size: 1.1em;
         font-weight: 300;
         line-height: 1.7em;
-        color: #999;
+        color: #c91e12;
     }
 
     a,
@@ -51,7 +51,7 @@
 
     .navbar {
         padding: 15px 10px;
-        background: #fff;
+        background: #c91e12;
         border: none;
         border-radius: 0;
         margin-bottom: 40px;
@@ -84,7 +84,7 @@
     #sidebar {
         min-width: 250px;
         max-width: 250px;
-        background: #7386D5;
+        background: #c91e12;
         color: #fff;
         transition: all 0.3s;
     }
@@ -95,12 +95,12 @@
 
     #sidebar .sidebar-header {
         padding: 20px;
-        background: #6d7fcc;
+        background-color: #c91e12;
     }
 
     #sidebar ul.components {
         padding: 20px 0;
-        border-bottom: 1px solid #47748b;
+        border-bottom: 1px solid #b01a10;
     }
 
     #sidebar ul p {
@@ -115,14 +115,14 @@
     }
 
     #sidebar ul li a:hover {
-        color: #7386D5;
+        color: #c91e12;
         background: #fff;
     }
 
     #sidebar ul li.active>a,
     a[aria-expanded="true"] {
         color: #fff;
-        background: #6d7fcc;
+        background: #c91e12;
     }
 
     a[data-toggle="collapse"] {
@@ -200,38 +200,21 @@
         <div class="sidebar-header">
           <h3>Menu</h3>
         </div>
-        <ul>
-          <p>User</p>
-        </ul>
         <ul class="list-unstyled components">
-          <li>
-            <a href="{{ url_for('reservation') }}">Reservation</a>
-          </li>
-          <p>Location</p>
-          <li class="active">
-            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Paul Galvin Library</a>
-            <ul class="collapse list-unstyled" id="homeSubmenu">
-              <li>
-                <a href="#">Location 1</a>
-              </li>
-              <li>
-                <a href="#">Location 2</a>
-              </li>
-              <li>
-                <a href="#">Location 3</a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">MTCC</a>
+         <li>
+            <a style="font-size:30px" href="{{ url_for('index')}}">Home</a>
+            <a style="font-size:30px">User</a>
+            <a style="font-size:30px" href="{{ url_for('reservation') }}">Reservation</a>
+            <a style="font-size:30px">Location</a>
+            <a style="font-size:30px">Rules and Policies</a>
           </li>
         </ul>
       </nav>
       <!-- Page Content  -->
       <div id="content">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #fff;">
           <div class="container-fluid">
-            <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <button type="button" id="sidebarCollapse" class="btn btn-info" style="background-color: #c91e12" style="border-color: #b01a10;">
               <i class="fas fa-align-left"></i>
                 <span>Menu</span>
             </button>
@@ -240,20 +223,20 @@
                 <li class="nav-item active">
                   <a class="nav-link" href="#">Login</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Logo</a>
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Sign Up</a>
                 </li>
               </ul>
             </div>
           </div>
         </nav>
         {% block header %}
-          <h2>{% block title %}Content{% endblock %}</h2>
+          <h1 style="font-size:75px">{% block title %}HawkSpot{% endblock %}</h1>
         {% endblock %}
+          <h2 style="font-size:50px">@ ILLINOIS Tech</h2>
         {% block content %}{% endblock %}
       </div>
     </div>
-
 </body>
 <script type="text/javascript">
     $(document).ready(function () {
