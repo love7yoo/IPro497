@@ -6,6 +6,10 @@ app = Flask(__name__)
 configure_app(app)
 db.init_app(app)
 
+import auth
+
+app.register_blueprint(auth.bp)
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -13,10 +17,6 @@ def index():
 #@app.route('/')
 #def user():
 #    return render_template('user/user.html')
-
-#@app.route('/')
-#def login():
-#    return render_template('login/login.html')
 
 #@app.route('/')
 #def sup(): #sign up page

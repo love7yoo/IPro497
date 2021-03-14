@@ -12,9 +12,11 @@ class User(db.Model):
     password = db.Column(db.String(20), nullable=False)
     name = db.Column(db.String(20), nullable=False)
 
-    def __init__(self, username, password):
+    def __init__(self, email_address, username, password, name):
+        self.email_address = email_address
         self.username = username
         self.password = password
+        self.name = name
 
 class Location(db.Model):
     __tablename__ = 'location'
@@ -28,9 +30,7 @@ class Reservation(db.Model):
     __tablename__ = 'reservation'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     email_address = db.Column(db.String(50), db.ForeignKey('user.email_address'))
-    email_address = db.relationship('User', foreign_keys=[email_address])
     location_id = db.Column(db.Integer, db.ForeignKey('location.id'))
-    location_id = db.relationship('Location', foreign_keys=[id])
     reservation_start = db.Column(db.DATETIME())
     reservation_end = db.Column(db.DATETIME())
 
