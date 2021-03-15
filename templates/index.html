@@ -252,12 +252,11 @@
           <div class="flash" style="color:red">{{ message }}</div>
         {% endfor %}
         {% block content %}
-          <img src="{{url_for('static', filename='images/IIT Info.jpg')}}" style="width:200px;height:300px;" />
         {% endblock %}
-
-
+         <img src="{{url_for('static', filename='images/map2.png')}}" style="width:1000px;height:1000px;" />
       </div>
     </div>
+   <img src="{{url_for('static', filename='images/IIT Info.jpg')}}" style="position:absolute;TOP:120px;RIGHT:15px;width:200px;height:300px;" />
 </body>
 <script type="text/javascript">
     $(document).ready(function () {
