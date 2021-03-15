@@ -203,8 +203,10 @@
         <ul class="list-unstyled components">
          <li>
             <a style="font-size:30px" href="{{ url_for('index')}}">Home</a>
-            <a style="font-size:30px">User</a>
+           {% if g.user %}
+            <a style="font-size:30px" href="{{ url_for('auth.userinfo') }}">User Info</a>
             <a style="font-size:30px" href="{{ url_for('reservation') }}">Reservation</a>
+           {% endif %}
             <a style="font-size:30px">Locations</a>
             <a style="font-size:30px">Rules and Policies</a>
           </li>
@@ -236,7 +238,6 @@
             </div>
           </div>
         </nav>
-        <img src="{{url_for('static', filename='images/IIT Info.jpg')}}" style="position:absolute;TOP:125px;RIGHT:15px;width:150px;height:200px;"/>
         {% block header %}
           <h1 style="font-size:75px">{% block title %}
             {% if g.user %}
@@ -250,8 +251,11 @@
         {% for message in get_flashed_messages() %}
           <div class="flash" style="color:red">{{ message }}</div>
         {% endfor %}
-        {% block content %}{% endblock %}
-         <img src="{{url_for('static', filename='images/map2.png')}}" style="width:1000px;height:1000px;"/>
+        {% block content %}
+          <img src="{{url_for('static', filename='images/IIT Info.jpg')}}" style="width:200px;height:300px;" />
+        {% endblock %}
+
+
       </div>
     </div>
 </body>

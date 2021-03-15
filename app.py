@@ -14,18 +14,6 @@ app.register_blueprint(auth.bp)
 def index():
     return render_template('index.html')
 
-@app.route('/')
-def login():
-    return render_template('auth/login.html')
-
-#@app.route('/')
-#def user():
-#    return render_template('user/user.html')
-
-@app.route('/')
-def register(): #sign up page
-    return render_template('auth/register.html')
-
 #@app.route('/')
 #def location():
 #    return render_template('location/location.html')

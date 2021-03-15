@@ -11,6 +11,7 @@ from models import *
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
+
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':
@@ -37,6 +38,7 @@ def register():
 
     return render_template('auth/register.html')
 
+
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
     if request.method == 'POST':
@@ -59,6 +61,7 @@ def login():
 
     return render_template('auth/login.html')
 
+
 @bp.before_app_request
 def load_logged_in_user():
     user_email_address = session.get('user_email_address')
@@ -68,7 +71,40 @@ def load_logged_in_user():
     else:
         g.user = User.query.filter_by(email_address=user_email_address).first()
 
+
 @bp.route('/logout')
 def logout():
     session.clear()
     return redirect(url_for('index'))
+
+
+@bp.route('/userinfo')
+def userinfo():
+    return render_template('auth/userinfo.html')
+
+
+@bp.route('/change_password', methods=['POST', 'GET'])
+def change_password():
+    if g.user is None:
+        redirect(url_for('auth.userinfo'))
+    if request.method == 'POST':
+        current_password = request.form['current_password']
+        new_password = request.form['new_password']
+        confirm_new_password = request.form['confirm_new_password']
+        error = None
+
+        if not check_password_hash(g.user.password, current_password):
+            error = 'Incorrect current password.'
+        elif new_password != confirm_new_password:
+            error = 'New passwords do not match.'
+
+        if error is None:
+            user = User.query.filter_by(email_address=g.user.email_address).first()
+            user.password = generate_password_hash(new_password)
+            g.user = user
+            db.session.commit()
+            return redirect(url_for('index'))
+
+        flash(error)
+
+    return render_template('auth/change_password.html')
