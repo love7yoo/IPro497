@@ -5,5 +5,21 @@
 {% endblock %}
 
 {% block content %}
+  <h3>Library Map</h3>
+  <img src="{{url_for('static', filename='images/librarymap.png')}}" style="width:1000px;height:1000px;" />
+  <span>
+    <ul style="list-style-type: none; display: inline-block;">
+      <li>Floor 1</li>
+      <li>Room 1</li>
+      <li>Room 2</li>
+      <li>Room 3</li>
+    </ul>
 
+    <ul style="list-style-type: none; display: inline-block;">
+      <li>Floor 2</li>
+      <li>Room 4</li>
+      <li>Room 5</li>
+      <li>Room 6</li>
+   </ul>
+  <span>
 {% endblock %}
