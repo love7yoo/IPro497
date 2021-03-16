@@ -14,9 +14,9 @@ app.register_blueprint(auth.bp)
 def index():
     return render_template('index.html')
 
-#@app.route('/')
-#def location():
-#    return render_template('location/location.html')
+@app.route('/location')
+def location():
+    return render_template('location/location.html')
 #@app.route('/')
 #def rnp(): #rules and policies
 #    return render_template('rnp/rnp.html')
