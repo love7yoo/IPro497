@@ -241,7 +241,8 @@
         {% block header %}
           <h1 style="font-size:75px">{% block title %}
             {% if g.user %}
-              Welcome to HawkSpot, {{ g.user['name'] }}
+              Welcome to HawkSpot, <br>
+              {{ g.user['name'] }}
             {% else %}
               HawkSpot
             {%endif%}
@@ -253,11 +254,15 @@
         {% endfor %}
         {% block content %}
         {% endblock %}
-         <img src="{{url_for('static', filename='images/map2.png')}}" style="width:1000px;height:1000px;" />
       </div>
     </div>
-   <img src="{{url_for('static', filename='images/IIT Info.jpg')}}" style="position:absolute;TOP:120px;RIGHT:15px;width:200px;height:300px;" />
 </body>
+  <script type="text/javascript">
+    if(location.href == index()){
+      <img src="{{url_for('static', filename='images/map2.png')}}" style="width:1000px;height:1000px;" />
+      <img src="{{url_for('static', filename='images/IIT Info.jpg')}}" style="position:absolute;TOP:120px;RIGHT:15px;width:200px;height:300px;" />
+    }
+  </script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {
