@@ -208,7 +208,7 @@
             <a style="font-size:30px" href="{{ url_for('reservation') }}">Reservation</a>
            {% endif %}
             <a style="font-size:30px" href="{{ url_for('location') }}">Locations</a>
-            <a style="font-size:30px">Rules and Policies</a>
+            <a style="font-size:30px" href="{{ url_for('rnp') }}">Rules and Policies</a>
           </li>
         </ul>
       </nav>
@@ -248,7 +248,9 @@
             {%endif%}
           {% endblock %}</h1>
         {% endblock %}
+        {% if request.path == "/" %}
           <h2 style="font-size:50px">@ ILLINOIS Tech</h2>
+        {% endif %}
         {% for message in get_flashed_messages() %}
           <div class="flash" style="color:red">{{ message }}</div>
         {% endfor %}

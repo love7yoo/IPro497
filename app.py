@@ -17,9 +17,9 @@ def index():
 @app.route('/location')
 def location():
     return render_template('location/location.html')
-#@app.route('/')
-#def rnp(): #rules and policies
-#    return render_template('rnp/rnp.html')
+@app.route('/rnp')
+def rnp(): #rules and policies
+    return render_template('rnp/rnp.html')
 
 @app.route('/reservation')
 def reservation():
