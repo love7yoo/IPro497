@@ -20,9 +20,9 @@ def index():
 def location():
     return render_template('location/location.html')
 
-@app.route('/rnp')
-def rnp(): #rules and policies
-    return render_template('rnp/rnp.html')
+@app.route('/rules_and_policies')
+def rules_and_policies(): #rules and policies
+    return render_template('rules_and_policies/rules_and_policies.html')
 
 @app.route('/reservation')
 def reservation():
