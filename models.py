@@ -23,8 +23,6 @@ class Location(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     building = db.Column(db.String(30), nullable=False)
     room = db.Column(db.String(10), nullable=False)
-    reservation_status = db.Column(db.Boolean())
-    reservation_length = db.Column(db.Integer())
 
 class Reservation(db.Model):
     __tablename__ = 'reservation'
@@ -33,6 +31,7 @@ class Reservation(db.Model):
     location_id = db.Column(db.Integer, db.ForeignKey('location.id'))
     reservation_start = db.Column(db.DATETIME())
     reservation_end = db.Column(db.DATETIME())
+    reservation_status = db.Column(db.Boolean())
 
 class Open_hours(db.Model):
     __tablename__ = 'open_hours'

@@ -7,6 +7,8 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from models import *
 
+import json
+
 # from flask_sqlalchemy import SQLAlchemy
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
@@ -80,8 +82,26 @@ def logout():
 
 @bp.route('/userinfo')
 def userinfo():
-    return render_template('auth/userinfo.html')
+    user_email_address = session.get('user_email_address')
+    res = db.session.query(Reservation).filter(Reservation.email_address == user_email_address).all()
+    print(res)
 
+    data = []
+    for temp in res:
+        out = dict()
+        out['email_address'] = temp.email_address
+        loc_id = db.session.query(Location).filter(Location.id == temp.location_id).all()
+        print(loc_id)
+        print(loc_id[0].building)
+        out['building'] = loc_id[0].building
+        out['room'] = loc_id[0].room
+        out['start'] = str(temp.reservation_start)
+        out['end'] = str(temp.reservation_end)
+        out['status'] = temp.reservation_status
+        data.append(out)
+
+    print(data)
+    return render_template('auth/userinfo.html',result = data)
 
 @bp.route('/change_password', methods=['POST', 'GET'])
 def change_password():

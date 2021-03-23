@@ -1,26 +1,103 @@
 {% extends 'index.html' %}
 
 {% block header %}
-  <h2>{% block title %}Reservation{% endblock %}</h2>
 {% endblock %}
 
 {% block content %}
-  <form method="post">
-      <br><br>
-    <h3>Location</h3>
-      <br>
-    &nbsp&nbsp<label for="building">Building Code</label> &nbsp
-    <input type="search" name="building" id="building" required> &nbsp&nbsp
-    &nbsp&nbsp<label for="room">Room</label> &nbsp
-    <input type="search" name="room" id="room" required>
-      <br><br>
-    <h3>Time</h3>
-      <br>
-    &nbsp&nbsp<label for="reservation_start">Start</label> &nbsp
-    <input type="datetime-local" name="reservation_start" id="reservation_start" required> &nbsp&nbsp
-    &nbsp&nbsp<label for="reservation_end">End</label> &nbsp
-    <input type="datetime-local" name="reservation_end" id="reservation_end" required> &nbsp&nbsp
-      <br><br>
-    <input type="submit" value="Reserve">
-  </form>
+    <style>
+    table, th, td {
+        border: 1px solid black;
+        text-align : center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    </style>
+    <h1>Reservation Status</h1>
+    <div>
+        <label>Location</label>
+        <select class="location_list" name="location_list"></select>
+        <td><button  id="search">Search</button></td>
+    </div>
+    <table id="data_table">
+        <tr>
+            <td class="title">Email</td>
+            <td class="title">Building</td>
+            <td class="title">Room</td>
+            <td class="title">Start</td>
+            <td class="title">End</td>
+            <td class="title">Status</td>
+        </tr>
+    </table>
+    <br><br><br><br>
+    <h1>Reserve</h1>
+    <form action = "http://127.0.0.1:7000/reserve" method="POST">
+        <div>
+            <select class="location_list" name="Location"></select>
+            <input type="datetime-local" name="reservation_start" id="reservation_start" required>
+            <input type="datetime-local" name="reservation_end" id="reservation_end" required>
+        </div>
+        <input type="submit" value="Reserve">
+    </form>
+
+    <script>
+    var host = 'http://'+window.location.host;
+
+    function draw(data){
+        for (i=0; i<data.length; i++){
+            str = '';
+            str+="<tr>";
+            str+="<td>"+ data[i]['email_address'] +"</td>";
+            str+="<td>"+ data[i]['building'] +"</td>";
+            str+="<td>"+ data[i]['room'] +"</td>";
+            str+="<td>"+ data[i]['start'] +"</td>";
+            str+="<td>"+ data[i]['end'] +"</td>";
+            str+="<td>"+ data[i]['status'] +"</td>";
+            str+="</tr>";
+            $('#data_table').append(str);
+        }
+    }
+
+    $.ajax({
+        url: host+"/location_list",
+        type: 'GET',
+        dataType: 'JSON',
+        success:function(data){
+            for ( var i=0; i<data.length; i++){
+                $( ".location_list" ).append( "<option value='"+data[i].building+"|"+data[i].room+" '>"+data[i].building+ "  |  "  + data[i].room+"</option>" );
+            }
+        },
+        error:function(e){
+            console.log(e);
+        }
+    });
+    $("#search").click(function(){
+        $('#data_table').empty();
+        $.ajax({
+            url: host+"/cur_reservation",
+            type: 'GET',
+            dataType: 'JSON',
+            data:{
+                "location":$(".location_list").val(),
+            },
+            success:function(data){
+                console.log(data);
+                $('#data_table').empty();
+                str = '';
+                str+="<tr>";
+                str+="<td class='title'>Email</td>";
+                str+="<td class='title'>Building</td>";
+                str+="<td class='title'>Room</td>";
+                str+="<td class='title'>Start</td>";
+                str+="<td class='title'>End</td>";
+                str+="<td class='title'>Status</td>";
+                str+="</tr>";
+                $('#data_table').append(str);
+                draw(data)
+            }
+        });
+    });
+    </script>
 {% endblock %}
+
+
+

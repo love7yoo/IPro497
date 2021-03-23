@@ -17,6 +17,10 @@
     <p>Name: {{ g.user['name'] }}</p>
       <br>
       <br>
+
     <h2>Current Reservation</h2>
+    {% for res in result %}
+    <li> Building : {{res['building']}} | Room : {{res['room']}} | Start : {{res['start']}} | End : {{res['end']}}</li>
+    {% endfor %}
   </form>
 {% endblock %}
