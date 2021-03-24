@@ -12,7 +12,7 @@
         margin-right: auto;
     }
     </style>
-    <h1>Reservation Status</h1>
+    <h1>Reservation</h1>
     <div>
         <label>Location</label>
         <select class="location_list" name="location_list"></select>
@@ -25,7 +25,7 @@
             <td class="title">Room</td>
             <td class="title">Start</td>
             <td class="title">End</td>
-            <td class="title">Status</td>
+            <td class="title">Reservation</td>
         </tr>
     </table>
     <br><br><br><br>
@@ -51,7 +51,7 @@
             str+="<td>"+ data[i]['room'] +"</td>";
             str+="<td>"+ data[i]['start'] +"</td>";
             str+="<td>"+ data[i]['end'] +"</td>";
-            str+="<td>"+ data[i]['status'] +"</td>";
+            str+="<td>"+ data[i]['reservation'] +"</td>";
             str+="</tr>";
             $('#data_table').append(str);
         }
@@ -89,7 +89,7 @@
                 str+="<td class='title'>Room</td>";
                 str+="<td class='title'>Start</td>";
                 str+="<td class='title'>End</td>";
-                str+="<td class='title'>Status</td>";
+                str+="<td class='title'>Reservation</td>";
                 str+="</tr>";
                 $('#data_table').append(str);
                 draw(data)

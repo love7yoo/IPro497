@@ -54,7 +54,7 @@ def cur_location():
         out['room'] = room
         out['start'] = str(temp.reservation_start)
         out['end'] = str(temp.reservation_end)
-        out['status'] = temp.reservation_status
+        out['reservation'] = temp.reservation_status
         data.append(out)
     # print(data)
     return json.dumps(data)
