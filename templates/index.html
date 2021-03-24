@@ -39,7 +39,7 @@
         font-size: 1.1em;
         font-weight: 300;
         line-height: 1.7em;
-        color: #c91e12;
+        color: #000000;
     }
 
     a,
@@ -193,6 +193,17 @@
             display: none;
         }
     }
+
+    /* ---------------------------------------------------
+        Rules and policies scripting
+    ----------------------------------------------------- */
+
+    .contact {
+    position: relative;
+    top: 100px;
+    left: 400px;
+    }
+
   </style>
   <body>
     <div class="wrapper">
@@ -209,7 +220,7 @@
             <a style="font-size:30px" href="{{ url_for('reservation') }}">Reservation</a>
            {% endif %}
             <a style="font-size:30px" href="{{ url_for('location') }}">Locations</a>
-            <a style="font-size:30px" href="{{ url_for('rnp') }}">Rules and Policies</a>
+            <a style="font-size:30px" href="{{ url_for('rules_and_policies') }}">Rules and Policies</a>
           </li>
         </ul>
       </nav>
