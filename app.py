@@ -3,6 +3,7 @@ from config import configure_app
 from models import *
 import json
 from datetime import datetime
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
 configure_app(app)
@@ -16,17 +17,21 @@ app.register_blueprint(auth.bp)
 def index():
     return render_template('index.html')
 
+
 @app.route('/location')
 def location():
     return render_template('location/location.html')
 
+
 @app.route('/rules_and_policies')
-def rules_and_policies(): #rules and policies
+def rules_and_policies():  # rules and policies
     return render_template('rules_and_policies/rules_and_policies.html')
+
 
 @app.route('/reservation')
 def reservation():
     return render_template('reservation/reservation.html')
+
 
 @app.route('/location_list')
 def location_list():
@@ -39,12 +44,14 @@ def location_list():
         data.append(tmp)
     return json.dumps(data)
 
+
 @app.route('/cur_reservation')
 def cur_location():
     loc = request.args.get("location")
     building = loc.split('|')[0]
     room = loc.split('|')[1][:-1]
-    res = db.session.query(Reservation).join(Location).filter(Location.building == building).filter(Location.room == room).all()
+    res = db.session.query(Reservation).join(Location).filter(Location.building == building).filter(
+        Location.room == room).all()
 
     data = []
     for temp in res:
@@ -59,7 +66,8 @@ def cur_location():
     # print(data)
     return json.dumps(data)
 
-@app.route('/reserve', methods = ['POST', 'GET'])
+
+@app.route('/reserve', methods=['POST', 'GET'])
 def reserve():
     if request.method == 'POST':
         res = (request.form).to_dict(flat=False)
@@ -84,10 +92,31 @@ def reserve():
 
         db.session.add(query)
         db.session.commit()
+
+        #send_email()
+
         return render_template('reservation/success.html')
     else:
         return render_template('reservation/fail.html')
 
 
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 2525
+app.config['MAIL_USERNAME'] = ''
+app.config['MAIL_PASSWORD'] = ''
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+app.config['MAIL_DEFAULT_SENDER'] = 'HawkSpot'
+mail = Mail(app)
+
+
+@app.route('/send_email')
+def send_email():
+    msg = Message('Your HawkSpot Reservation is Confirmed!', recipients=[session.get('user_email_address')])
+    msg.body = "TEST EMAIL"
+    mail.send(msg)
+    return "Message sent!"
+
+
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=7000)
+    app.run(host='localhost', port=7000)
