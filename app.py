@@ -32,6 +32,10 @@ def rules_and_policies():  # rules and policies
 def reservation():
     return render_template('reservation/reservation.html')
 
+@app.route('/room_report')
+def report():
+    return render_template('rules_and_policies/report.html')
+
 
 @app.route('/location_list')
 def location_list():
