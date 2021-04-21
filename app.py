@@ -36,6 +36,9 @@ def reservation():
 def report():
     return render_template('rules_and_policies/report.html')
 
+@app.route('/room_report_success')
+def r_s():
+    return render_template('rules_and_policies/r_s.html')
 
 @app.route('/location_list')
 def location_list():
@@ -69,7 +72,6 @@ def cur_location():
         data.append(out)
     # print(data)
     return json.dumps(data)
-
 
 @app.route('/reserve', methods=['POST', 'GET'])
 def reserve():
