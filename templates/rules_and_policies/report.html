@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+
+{% block header %}
+  <h1>{% block title %}Room Report{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+<form>
+    <label style="padding: 20px 50px 40px 120px;">Full Name:</label>
+    <input style="padding: 0px 0px 0px 20px;" type="text" id="funame" name="funame">
+    <label style="padding: 0px 50px 40px 100px;">Reason for Report:</label>
+    <input style="padding: 0px 0px 0px 20px;" type="text" id="reason" name="reason"><br>
+    <label style="padding: 0px 50px 40px 0px;">Potential Offender Name:</label>
+    <input style="padding: 0px 0px 0px 20px;" type="text" id="oname" name="oname">
+    <label style="padding: 0px 50px 40px 50px;">Potential Offender Email:</label>
+    <input style="padding: 0px 0px 0px 20px;" type="text" id="omail" name="omail"><br>
+    <label style="padding: 0px 0px 0px 105px;">Description:</label><br>
+    <input style="margin-left:100px; padding: 175px 605px 100px 100px;" type="text" id="desc" name="desc"><br>
+    <input style="margin-left:100px; margin-top:20px;" type="submit">
+</form>
+{% endblock %}
