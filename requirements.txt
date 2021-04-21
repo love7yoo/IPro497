@@ -8,3 +8,8 @@ setuptools   == 53.0.0
 Werkzeug     == 1.0.1
 wheel        == 0.36.2
 Flask-SQLAlchemy == 2.4.4
+Flask-Mail
+requests==2.21.0
+oauthlib==3.0.1
+pyOpenSSL==19.0.0
+Flask-Login==0.4.1
