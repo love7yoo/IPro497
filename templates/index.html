@@ -303,6 +303,9 @@
         console.log('Signed in as: ' + xhr.responseText);
       };
       xhr.send('idtoken=' + id_token);
+
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.disconnect();
     }
     $('#signout').click(signOut);
     function signOut() {

@@ -39,7 +39,7 @@ def tokensignin():
                                                   '986356076768-il18j7f2ep676n49564027qqv6h6l7a7.apps.googleusercontent.com')
             # If auth request is from a G Suite domain:
             if idinfo['hd'] != ('hawk.iit.edu' or 'iit.edu'):
-                return render_template('index.html')
+                return render_template('loading.html')
 
             # ID token is valid. Get the user's Google Account ID from the decoded token.
             userid = idinfo['sub']
@@ -77,10 +77,6 @@ def load_logged_in_user():
     else:
         g.user = User.query.filter_by(email_address=email_address).first()
 
-
-@app.route('/loading')
-def loading():
-    return render_template('loading/loading.html')
 
 @app.route('/location')
 def location():
