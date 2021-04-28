@@ -13,4 +13,7 @@ requests==2.21.0
 oauthlib==3.0.1
 pyOpenSSL==19.0.0
 Flask-Login==0.4.1
-google~=3.0.0
+google==3.0.0
+google-auth
+google-auth-httplib2
+google-api-python-client
