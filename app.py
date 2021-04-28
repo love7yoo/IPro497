@@ -1,7 +1,5 @@
 import webbrowser
 
-from selenium import webdriver
-
 from flask import Flask, render_template, url_for, request, session, g
 from werkzeug.utils import redirect
 
