@@ -221,7 +221,7 @@
          <li>
             <a style="font-size:30px" href="{{ url_for('index')}}">Home</a>
            {% if g.user %}
-            <a style="font-size:30px" href="{{ url_for('auth.userinfo') }}">User Info</a>
+            <a style="font-size:30px" href="{{ url_for('userinfo') }}">User Info</a>
             <a style="font-size:30px" href="{{ url_for('reservation') }}">Reservation</a>
            <a style="font-size:30px" href="{{ url_for('report') }}">Room Report</a>
            {% endif %}
@@ -242,7 +242,7 @@
               <ul class="nav navbar-nav ml-auto">
                 {% if g.user %}
                   <li class="nav-item active">
-                    <a class="nav-link" id="signout"  href="{{ url_for('auth.logout') }}">Logout</a>
+                    <a class="nav-link" id="signout"  href="{{ url_for('logout') }}">Logout</a>
                   </li>
                 {% else %}
                   <li class="nav-item active">
@@ -273,7 +273,7 @@
         {% block content %}
         {% endblock %}
         {% if request.path == "/" %}
-            <img src="{{url_for('static', filename='images/map2.png')}}" style="width:1000px;height:1000px;" />
+            <img src="{{url_for('static', filename='images/map2.png')}}" style="width:800px;height:1000px;" />
         {% endif %}
       </div>
       {% if request.path == "/" %}

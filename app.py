@@ -17,10 +17,6 @@ configure_app(app)
 db.init_app(app)
 mail = Mail(app)
 
-import auth
-
-app.register_blueprint(auth.bp)
-
 
 @app.route('/')
 def index():
@@ -37,7 +33,7 @@ def tokensignin():
             # Specify the CLIENT_ID of the app that accesses the backend:
             idinfo = id_token.verify_oauth2_token(token, requests.Request(),
                                                   '986356076768-il18j7f2ep676n49564027qqv6h6l7a7.apps.googleusercontent.com')
-            # If auth request is from a G Suite domain:
+            # If request is from a G Suite domain:
             if idinfo['hd'] != ('hawk.iit.edu' or 'iit.edu'):
                 return redirect(url_for('index'))
 
@@ -68,6 +64,35 @@ def tokensignin():
 
     return render_template('index.html')
 
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
+
+
+@app.route('/userinfo')
+def userinfo():
+    user_email_address = session.get('user_email_address')
+    res = db.session.query(Reservation).filter(Reservation.email_address == user_email_address).all()
+    print(res)
+
+    data = []
+    for temp in res:
+        out = dict()
+        out['email_address'] = temp.email_address
+        loc_id = db.session.query(Location).filter(Location.id == temp.location_id).all()
+        print(loc_id)
+        print(loc_id[0].building)
+        out['building'] = loc_id[0].building
+        out['room'] = loc_id[0].room
+        out['start'] = str(temp.reservation_start)
+        out['end'] = str(temp.reservation_end)
+        out['status'] = temp.reservation_status
+        data.append(out)
+
+    print(data)
+    return render_template('userinfo/userinfo.html',result = data)
 
 @app.before_request
 def load_logged_in_user():
